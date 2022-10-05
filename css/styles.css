@@ -1,0 +1,16 @@
+* { box-sizing: border-box; }
+body{
+    padding: 20px;
+    color: blue;
+    font-size: 20px;
+}
+.heading{
+    color: black;
+}
+@media all and (max-width: 500px) {
+    body{
+        padding: 20px;
+        color: red;
+        font-size: 18px;
+    }
+  }
