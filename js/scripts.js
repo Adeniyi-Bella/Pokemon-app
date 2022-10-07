@@ -1,61 +1,85 @@
 // Creating an array of objects of Pokemon types
-
-// console.log(typeof({}))
 let pokemonRepository = (function () {
-  let pokemonList = [
-    {
-      pokemonName: "Bulbasaur",
-      pokemonHeight: 0.7,
-      pokemonType: ['grass', 'poison'],
-      pokemonAbilities: ['Chlorophyll', 'Overgrow'],
-    },
-    {
-      pokemonName: 'Charmeleon',
-      pokemonHeight: 1.1,
-      pokemonType: ['fire'],
-      pokemonAbilities: ['Blaze', 'Solar-power']
-    },
-    {
-      pokemonName: 'Fearow',
-      pokemonHeight: 1.2,
-      pokemonType: ['flying', 'normal'],
-      pokemonAbilities: ['Keen-eye', 'Sniper']
-    }
-  ]
-
-  return {
-    add: function (pokemon) {
-      if (typeof (pokemon) === 'object') {
-        pokemonList.push(pokemon);
+   let repository = [
+      {
+         pokemonName: "Bulbasaur",
+         pokemonHeight: 0.7,
+         pokemonType: ['grass', 'poison'],
+         pokemonAbilities: ['Chlorophyll', 'Overgrow'],
+      },
+      {
+         pokemonName: 'Charmeleon',
+         pokemonHeight: 1.1,
+         pokemonType: ['fire'],
+         pokemonAbilities: ['Blaze', 'Solar-power']
+      },
+      {
+         pokemonName: 'Fearow',
+         pokemonHeight: 1.2,
+         pokemonType: ['flying', 'normal'],
+         pokemonAbilities: ['Keen-eye', 'Sniper']
       }
-      else { 'An object is expected' }
-    },
+   ];
+   // Function to add a new pokemon object
+   function add(pokemon) {
+      if (
+         typeof pokemon === "object" &&
+         "pokemonName" in pokemon &&
+         "pokemonHeight" in pokemon &&
+         "pokemonType" in pokemon &&
+         "pokemonAbilities" in pokemon
+      ) { repository.push(pokemon); }
+      else { console.log("pokemon is not correct"); }
+   }
 
-    getAll: function () {
-      return pokemonList;
-    }
-  }
+   // Function to get all pokemon collection in array
+   function getAll() {
+      return repository;
+   }
+
+   // function to create a front end for our pokemon array
+   function addListItem(pokemon) {
+      let pokemonList = document.querySelector(".pokemon-list");
+      let listpokemon = document.createElement("li");
+      let button = document.createElement("button");
+      button.innerText = pokemon.pokemonName;
+      button.classList.add("button-class");
+      listpokemon.appendChild(button);
+      pokemonList.appendChild(listpokemon);
+      return button
+   }
+
+   // function to know when button is clicked
+   function eventListen(button,pokemon){
+      button.addEventListener('click', function() 
+      {showDetails(pokemon)}
+      )
+   }
+
+   // function called when button is clicked
+   function showDetails(pokemon) {
+      console.log(pokemon.pokemonName);
+      
+   }
+
+   return {
+      add: add,
+      getAll: getAll,
+      addListItem: addListItem,
+      eventListen: eventListen
+   };
 })();
 
 // Adding a new object to the Pokemon Array
 pokemonRepository.add({
-  pokemonName: 'Fearow',
-  pokemonHeight: 0.9,
-  pokemonType: ['flying', 'normal'],
-  pokemonAbilities: ['Keen-eye', 'Sniper']
+   pokemonName: 'Fearow',
+   pokemonHeight: 0.9,
+   pokemonType: ['flying', 'normal'],
+   pokemonAbilities: ['Keen-eye', 'Sniper']
 })
 
-document.write('<p class= "heading">List of Pokemons with their height </p>')
-
-// Writing to DOM name and Height of Pokemon
 pokemonRepository.getAll().forEach(pokemon => {
-  let Name = pokemon.pokemonName
-  let Height = pokemon.pokemonHeight
-  // Checking if Pokemon is taller than 1m
-  if (Height > 1.0) {
-    // document.write(pokemon.imgPath)
-    document.write(`<p>${Name} (height:${Height}m) - Wow That's Big!! </p>`)
-  } else {
-    document.write(`<p>${Name} (height:${Height}m) </p>`)
-  }
+   let getButton=pokemonRepository.addListItem(pokemon);
+   pokemonRepository.eventListen(getButton,pokemon);
 });
+
