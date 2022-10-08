@@ -9,12 +9,21 @@
 </head>
 
 <body>
-   <div class="pokemon-section">
-      <h2>Pokedex</h2>
-      <div class="loader"></div>
-      <ul class="pokemon-list">
-      </ul>
+   <div class="flex-div">
+      <div class="pokemon-section">
+         <h2>Pokedex</h2>
+         <div class="loader"></div>
+         <ul class="pokemon-list">
+         </ul>
+      </div>
+      <div class="show-details" style="visibility: hidden;">
+         <p id="pokemon-name" style="display: inline-block;"></p>
+         <p id="pokemon-height" style="display: inline-block; float: right; padding-right: 30px;"></p>
+         <img id="pokemon-img" style="display: block;" src="#"alt="">
+         <p class="close-button" style="margin-top: 100px; margin-left: 200px; box-sizing: border-box; display: none; cursor: pointer">close</p>
+      </div>
    </div>
+
    <script src="js/fetch.umd.js"></script>
    <script src="js/polyfill.min.js"></script>
    <script src="js/scripts.js"></script>
