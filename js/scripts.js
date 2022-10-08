@@ -92,6 +92,7 @@
 // Creating an array of objects of Pokemon types
 let pokemonRepository = (function () {
    let repository = [];
+   let getBorderDisplay = document.querySelector('.show-details')
    // let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=5';
    // Function to add a new pokemon object
    function add(pokemon) {
@@ -123,22 +124,40 @@ let pokemonRepository = (function () {
    // calls the loadDetails function when button is clicked
    async function showDetails(pokemon) {
       await loadDetails(pokemon)
-      console.log(pokemon);
+      showPokemon(pokemon);
+      showLoadingMessage('.close-button')
    }
 
-   function showLoadingMessage() {
-      let spinner = document.querySelector('.loader')
+   function showPokemon(pokemon) {
+      getBorderDisplay.style.visibility = 'visible'
+      let getidPokemonName = document.querySelector('#pokemon-name')
+      getidPokemonName.innerText = `${pokemon.pokemonName.replace(/^./, str => str.toUpperCase())}`
+      let getidPokemonHeight = document.querySelector('#pokemon-height')
+      getidPokemonHeight.innerText = `${pokemon.height}m tall`
+      let getidPokemonImg = document.querySelector('#pokemon-img')
+      getidPokemonImg.src = `${pokemon.imageUrl}`
+   }
+
+   function showLoadingMessage(id) {
+      let spinner = document.querySelector(id)
       spinner.style.display = 'block'
    }
+   // close the pokemon display section
+   let getSpinner = document.querySelector('.close-button')
+   getSpinner.addEventListener('click', function () {
+      getBorderDisplay.style.visibility = 'hidden'
+   })
+
+   // Hiding spinner gif
    function hideLoadingMessage() {
       let spinner = document.querySelector('.loader')
       spinner.style.display = 'none'
    }
    // creating a list of pokemon objects
    async function loadList() {
-      showLoadingMessage()
+      showLoadingMessage('.loader')
       // Fetching the pokemon api
-      let apiUrl = await fetch('https://pokeapi.co/api/v2/pokemon/?limit=5');
+      let apiUrl = await fetch('https://pokeapi.co/api/v2/pokemon/?limit=15');
       // Converting to json
       let jsonConvert = await apiUrl.json()
       let Json = jsonConvert.results
