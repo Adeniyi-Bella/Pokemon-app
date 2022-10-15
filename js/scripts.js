@@ -163,7 +163,7 @@ let pokemonRepository = (function () {
       return pokemon
    }
 
-   // function to create a front end for our pokemon array
+      // function to create a front end for our pokemon array
    function addListItem(pokemon) {
       let pokemonList = document.querySelector(".list-group");
       let listpokemon = document.createElement("li");
@@ -176,6 +176,7 @@ let pokemonRepository = (function () {
       pokemonImg.src = pokemon.imageUrl
       let button = document.createElement("button");
       button.innerText = 'click me';
+      button.classList.add('click-me')
       listpokemon.appendChild(pokemonImg);
       listpokemon.appendChild(button);
       listpokemon.appendChild(PokemonName)
@@ -189,27 +190,27 @@ let pokemonRepository = (function () {
       spinner.style.display = 'none'
    }
 
-   // function to know when button is clicked
-   function eventListen(button, pokemon) {
-      console.log(button);
-      button.addEventListener('click', function () { showDetails(pokemon) }
-      )
-   }
+      // function to know when button is clicked
+      function eventListen(button, pokemon) {
+         console.log(button);
+         button.addEventListener('click', function () { showDetails(pokemon) }
+         )
+      }
 
-   async function showDetails(pokemon) {
-      showPokemon(pokemon);
-   }
+      async function showDetails(pokemon) {
+         showPokemon(pokemon);
+      }
 
-   function showPokemon(pokemon) {
-      console.log(pokemon.pokemonName);
-      modal.style.display = "block";
-      let getpokemonIdtoDisplay = document.getElementById("Name-two")
-      getpokemonIdtoDisplay.innerText = `I am called ${pokemon.pokemonName}. This is my modal view`
-      let getpokemonImgtoDisplay = document.getElementById("image-two")
-      getpokemonImgtoDisplay.src = pokemon.imageUrl
-      let borderDisplay = document.getElementById("show-details")
-      borderDisplay.style.display = 'block'
-   }
+      function showPokemon(pokemon) {
+         console.log(pokemon.pokemonName);
+         modal.style.display = "block";
+         let getpokemonIdtoDisplay = document.getElementById("Name-two")
+         getpokemonIdtoDisplay.innerText = `I am called ${pokemon.pokemonName}. This is my modal view`
+         let getpokemonImgtoDisplay = document.getElementById("image-two")
+         getpokemonImgtoDisplay.src = pokemon.imageUrl
+         let borderDisplay = document.getElementById("show-details")
+         borderDisplay.style.display = 'block'
+      }
 
    let btnCloseModal = document.querySelector('.close-modal')
    btnCloseModal.addEventListener('click', function () {
