@@ -7,4 +7,4 @@ A modal overlay view was implemented for each pokemon character.
 * HTML, CSS and JavaScript
 
 ## Live Demo
-https://amelieberry.github.io/hyrule-compendium-app/
+https://adeniyi-bella.github.io/Pokemon-app/
